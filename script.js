@@ -216,8 +216,8 @@ let heartFallInterval = null;
 
 function startFallingHearts() {
   if (heartFallInterval) return; 
-  // create a heart every 75ms => big "storm" of hearts
-  heartFallInterval = setInterval(createFallingHeart, 75);
+  // create a heart every 50ms => big "storm" of hearts
+  heartFallInterval = setInterval(createFallingHeart, 50);
 }
 
 function stopFallingHearts() {
