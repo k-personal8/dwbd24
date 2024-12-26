@@ -1,0 +1,168 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: #fffaf0; /* warm background color */
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* hide scrollbars if heart moves near edges */
+  }
+  
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* HEART-BUTTON - diamond + two circles approach */
+  .heart-button {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #ff4f81;
+    transform: rotate(-45deg); /* diamond orientation */
+    border: none;
+    cursor: pointer;
+    outline: none;
+    z-index: 2; /* above trailing dots */
+  
+    /* If locked => the JS sets opacity: 0.5; cursor: not-allowed */
+  }
+  
+  /* Heart top circles */
+  .heart-button::before,
+  .heart-button::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #ff4f81;
+    border-radius: 50%;
+  }
+  
+  .heart-button::before {
+    top: -40px; /* half of 80px height */
+    left: 0;
+  }
+  .heart-button::after {
+    top: 0;
+    left: 40px; /* half of 80px width */
+  }
+  
+  /* LOCKED MESSAGE */
+  .locked-message {
+    position: fixed;              /* fix it in place */
+    top: 50%;                     /* center vertically */
+    left: 50%;                    /* center horizontally */
+    transform: translate(-50%, -50%);
+    z-index: 9999;                /* very high to appear above modals/overlays */
+  
+    background-color: #ffebee;    /* your pinkish background */
+    border: 2px solid #f8bbd0;
+    border-radius: 8px;
+    color: #d16088;
+    font-size: 1.1rem;
+    padding: 20px;
+    display: none;                /* shown in JS if locked */
+    max-width: 500px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    text-align: center;           /* optional, to center text */
+  }
+  
+  
+  #countdown {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  /* TRAIL DOTS */
+  .trail-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #ff8ebc;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 1s linear; /* fade out over 1s */
+    z-index: 1; /* behind the heart button (z-index:2) */
+  }
+  
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; 
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .close:hover {
+    color: #333;
+  }
+  
+  .modal-content h2 {
+    color: #d16088;
+    margin-bottom: 10px;
+  }
+  .modal-content p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    white-space: pre-line;
+  }
+  
+  /* FALLING HEARTS */
+  .falling-hearts-container {
+    pointer-events: none;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* shown after modal opens */
+    z-index: 500;  /* behind the modal but above normal content */
+  }
+  
+  .falling-heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    color: #ff4f81;
+    font-size: 20px;
+    animation: fall 5s linear forwards;
+  }
+  
+  @keyframes fall {
+    0% { top: -20px; opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+  }
+  
