@@ -8,9 +8,9 @@ const lockedMessageEl = document.getElementById("lockedMessage");
 const countdownEl = document.getElementById("countdown");
 
 /*********************************
-   Lock Until December 26, 2024
+   Lock Until December 26, 2024 12 AM CST
 **********************************/
-const unlockDate = new Date("2024-12-25T01:00:00");
+const unlockDate = new Date("2024-12-26T01:00:00");
 let countdownInterval = null;
 
 // Checks if it's locked or unlocked on page load
